@@ -1,10 +1,10 @@
-  📝 Task Manager App
+ # 📝 Task Manager App
   
 A simple task manager with drag-and-drop, edit, and filter functionality. Built with React, TypeScript, Redux Toolkit, and DnD Kit.
 
 
 
-  🚀 Features
+ # 🚀 Features
   
 🧩 Add, edit, delete tasks 
 
@@ -23,7 +23,7 @@ A simple task manager with drag-and-drop, edit, and filter functionality. Built 
 
 
 
-  ⚙️ Tech Stack
+ # ⚙️ Tech Stack
   
 React + TypeScript 
 
@@ -41,7 +41,7 @@ ESLint + Prettier
 
 
 
-  🚧 Plans for Improvement
+ # 🚧 Plans for Improvement
   
 🔄 Refactor container logic 
 
