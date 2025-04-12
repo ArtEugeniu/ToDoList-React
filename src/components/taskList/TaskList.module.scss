@@ -1,0 +1,144 @@
+@use '../../styles/variables' as *;
+
+.task {
+
+  &List {
+    max-height: 469px;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  &Item {
+    border: 2px solid $mark-color;
+    border-radius: 10px;
+    background-color: #242320;
+    padding: 16px 10px 16px 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: grab;
+    gap: 10px;
+
+    &Drag {
+      background-color: red ;
+    }
+
+    &:active {
+      cursor: grabbing;
+    }
+
+
+
+    &:not(:last-child) {
+      margin-bottom: 16px;
+    }
+
+    & input {
+      height: 15px;
+      width: 15px;
+      cursor: pointer;
+
+      &:checked~div {
+
+        h3,
+        p {
+          text-decoration: line-through;
+          text-decoration-color: $mark-color;
+        }
+      }
+    }
+
+    & h3 {
+      font-size: 1.33rem;
+      margin-top: 5px;
+      max-width: 409px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    & p {
+      font-size: 0.9rem;
+      max-width: 409px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+  }
+
+  &Text {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  &EditButton,
+  &DeleteButton {
+    position: relative;
+    padding: 16px;
+    border: 2px solid $mark-color;
+    border-radius: 5px;
+    background-color: #242320;
+    transition: box-shadow 0.3s, background-color 0.3s, opacity 0.3s;
+
+    &:hover {
+      background-color: $background--hover;
+      box-shadow: $box-shadow;
+    }
+
+    &:active {
+      opacity: 0.4;
+    }
+  }
+
+  &Buttons {
+    display: flex;
+    gap: 5px;
+  }
+
+  &EditButton {
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-image: url('../../assets/images/icons/edit-icon.svg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      width: 15px;
+      aspect-ratio: 1 / 1;
+    }
+  }
+
+  &DeleteButton {
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 1px;
+      background-color: $mark-color;
+      border-radius: 5px;
+      left: 50%;
+      top: 50%;
+    }
+
+    &::before {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    &::after {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+  }
+
+  &DragOverlay li {
+    cursor: grabbing;
+  }
+}
+

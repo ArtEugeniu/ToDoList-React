@@ -1,0 +1,16 @@
+@use '../../styles/variables' as *;
+
+.todoApp {
+  background-color: $dark-background;
+  max-width: 600px;
+  width: 100%;
+  margin: 100px auto 0;
+  height: 80vh;
+  border-radius: 10px;
+  padding: 20px;
+
+  & h1 {
+    text-align: center;
+    margin-bottom: 18px;
+  }
+}

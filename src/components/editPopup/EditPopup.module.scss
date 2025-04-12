@@ -1,0 +1,82 @@
+@use '../../styles/variables' as *;
+
+.edit {
+  &Overlay {
+    position: absolute;
+    inset: 0;
+    background-color: #000000be;
+    z-index: 100;
+  }
+  &Container {
+    background-color: $dark-background;
+    padding: 20px 20px 15px;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 101;
+    max-width: 563px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+  }
+
+  &List {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+  }
+
+  &Input {
+    border: 1px solid $mark-color;
+    border-radius: 5px;
+    background-color: $light-background;
+    padding: 7px 8px;
+    width: 100%;
+    transition: box-shadow 0.3s, background-color 0.2s;
+    
+    &:hover {
+      box-shadow: $box-shadow;
+    }
+
+    &:focus {
+      box-shadow: 0 0 4px 2px $mark-color;
+      background-color: $background--hover;
+    }
+  }
+
+  &InputDesc {
+    resize: none;
+    width: 100%;
+    height: 70px;
+  }
+
+  &Buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  &Button {
+    width: 78px;
+    height: 34px;
+    background-color: $dark-background;
+    border-radius: 5px;
+    border: none;
+    color: $text-color;
+    border: 1px solid $mark-color;
+    font-size: 1.2rem;
+    transition: box-shadow 0.3s, opacity 0.3s, background-color 0.3s;
+
+    &:hover {
+      box-shadow: $box-shadow;
+      background-color: $background--hover;
+    }
+
+    &:active {
+      opacity: 0.4;
+    }
+  }
+}

@@ -1,0 +1,42 @@
+@use '../../styles/variables' as *;
+
+.filter {
+  background-color: $light-background;
+  border-radius: 5px;
+  border: 1px solid $mark-color;
+  color: $text-color;
+  padding: 6px 12px;
+  max-width: 198px;
+  width: 100%;
+  text-align: center;
+  appearance: none;
+  transition: box-shadow 0.2s, background-color 0.2s;
+
+  &:hover {
+    box-shadow: $box-shadow;
+    background-color: $background--hover;
+  }
+  &:focus-visible {
+    box-shadow: $box-shadow;
+  }
+}
+
+.deleteAllButton {
+  background-color: $light-background;
+  border-radius: 5px;
+  border: 1px solid $mark-color;
+  position: relative;
+  color: $text-color;
+  padding: 6px 12px;
+  transition: background-color 0.3s ease-in-out, opacity 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    background-color: $background--hover;
+    box-shadow: $box-shadow;
+  }
+
+  &:active {
+    opacity: 0.3;
+  }
+}
+

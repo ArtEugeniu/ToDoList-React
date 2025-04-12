@@ -1,0 +1,55 @@
+@use '../../styles/variables' as *;
+
+.popup {
+  background-color: $light-background;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+  position: absolute;
+  padding: 45px 50px 30px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  gap: 37px;
+  box-shadow: $box-shadow;
+  z-index: 101;
+
+  &Message {
+    font-size: 1.4rem;
+  }
+
+  &Button {
+    width: 78px;
+    height: 34px;
+    background-color: $dark-background;
+    border-radius: 5px;
+    border: none;
+    color: $text-color;
+    border: 1px solid $mark-color;
+    font-size: 1.2rem;
+    transition: box-shadow 0.3s, opacity 0.3s, background-color 0.3s;
+
+    &:not(:last-child) {
+      margin-right: 15px;
+    }
+
+    &:hover {
+      box-shadow: $box-shadow;
+      background-color: $background--hover;
+    }
+
+    &:active {
+      opacity: 0.4;
+    }
+  }
+
+  &Overlay {
+    position: absolute;
+    inset: 0;
+    background-color: #000000b0;
+    z-index: 100;
+  }
+}

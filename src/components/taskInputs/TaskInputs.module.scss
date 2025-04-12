@@ -1,0 +1,28 @@
+@use '../../styles/variables' as *;
+
+.input {
+  &List {
+
+  }
+
+  &Item:not(:last-child) {
+    margin-bottom: 6px;
+  }
+
+  &Item input {
+    border: 1px solid $mark-color;
+    border-radius: 5px;
+    background-color: #242320;
+    padding: 7px 8px;
+    transition: box-shadow 0.3s, background-color 0.2s;
+    
+    &:hover {
+      box-shadow: $box-shadow;
+    }
+
+    &:focus {
+      box-shadow: 0 0 4px 2px $mark-color;
+      background-color: $background--hover;
+    }
+  }
+}
