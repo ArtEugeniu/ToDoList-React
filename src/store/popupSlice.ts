@@ -19,7 +19,7 @@ const popupSlice = createSlice({
   name: 'popup',
   initialState,
   reducers: {
-    openPopup: (state, action: PayloadAction<IPopupSliceType>) => {
+    openPopup: (_, action: PayloadAction<IPopupSliceType>) => {
       return {
         isOpen: action.payload.isOpen,
         type: action.payload.type,
