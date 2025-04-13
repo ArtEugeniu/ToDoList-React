@@ -26,9 +26,11 @@ const taskListSlice = createSlice({
     addNewTask: (state, action: PayloadAction<ITaskListSliceTypes>) => {
       state.push(action.payload);
     },
+
     deleteTask: (state, action: PayloadAction<string>) => {
       return state.filter(item => item.id !== action.payload)
     },
+
     toggleStatus: (state, action: PayloadAction<string>) => {
       return state.map(item => {
         if (item.id === action.payload) {
@@ -43,14 +45,17 @@ const taskListSlice = createSlice({
         }
       })
     },
+
     saveEditTask: (state, action: PayloadAction<{ newTitle: string, newDescription: string, id: string }>) => {
       return state.map(item => {
         return item.id === action.payload.id ? {...item, title: action.payload.newTitle, description: action.payload.newDescription} : item
       })
     },
+
     deleteAllCompleted: (state) => {
       return state.filter(item => item.status === false);
     },
+    
     updateTaskOrder: (state, action: PayloadAction<{ oldId: string, newId: string }>) => {
       const { oldId, newId } = action.payload;
 

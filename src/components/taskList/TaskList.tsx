@@ -1,7 +1,7 @@
 import styles from './TaskList.module.scss';
 import SortableTask from './sortableTask/SortableTask';
 import { useState } from 'react';
-import { useAppDispatch } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { updateTaskOrder } from '../../store/taskListSlice';
 import {
   DndContext,
@@ -19,25 +19,21 @@ import {
   restrictToFirstScrollableAncestor
 } from '@dnd-kit/modifiers';
 
-
-interface TaskListPropsType {
-  taskData: {
+interface ITaskListTypes {
+  taskList: {
     title: string
     description: string
     id: string
     status: boolean
   }[]
-  onDeleteClick: (id: string) => void
-  onStatusChange: (id: string) => void
-  onEditClick: (id: string, title: string, desc: string) => void
 }
 
 
-const TaskList: React.FC<TaskListPropsType> = ({ taskData, onDeleteClick, onStatusChange, onEditClick }) => {
+const TaskList: React.FC<ITaskListTypes> = ({ taskList }) => {
 
   const [draggingId, setDraggingId] = useState<string | null>(null);
   const dispatch = useAppDispatch();
-
+  const taskData = useAppSelector(state => state.taskList)
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
       distance: 8
@@ -77,14 +73,11 @@ const TaskList: React.FC<TaskListPropsType> = ({ taskData, onDeleteClick, onStat
       <ul className={styles.taskList}>
         <SortableContext items={taskData} >
           {
-            taskData.map(item => {
+            taskList.map(item => {
               return (
                 <SortableTask
                   key={item.id}
                   task={item}
-                  onDeleteClick={onDeleteClick}
-                  onStatusChange={onStatusChange}
-                  onEditClick={onEditClick}
                 />
               )
             })
@@ -96,9 +89,6 @@ const TaskList: React.FC<TaskListPropsType> = ({ taskData, onDeleteClick, onStat
           <SortableTask
             key={draggingId}
             task={taskData.find((task) => task.id === draggingId)!}
-            onDeleteClick={onDeleteClick}
-            onStatusChange={onStatusChange}
-            onEditClick={onEditClick}
           />
         </div>
       </DragOverlay>

@@ -1,56 +1,75 @@
-import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from './hooks';
+import { openPopup, closePopup } from '../store/popupSlice';
+import { deleteTask, deleteAllCompleted, saveEditTask } from '../store/taskListSlice';
+
 
 export const useConfirmPopup = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [editIsOpen, setEditIsOpen] = useState<boolean>(false);
-  const [message, setMessage] = useState<string>('');
-  const [taskId, setTaskId] = useState<string | undefined>('');
-  const [deleteConfirmed, setDeleteConfirmed] = useState<(id: string) => void>(() => { });
-  const [deleteAllConfirmed, setDeleteAllConfirmed] = useState<() => void>(() => { });
 
-  const openPopup = (message: string, deleteConfirmed: (id: string) => void, id?: string) => {
-    setMessage(message);
-    setTaskId(id);
-    if (id) {
-      setDeleteConfirmed(() => deleteConfirmed);
-    } else {
-      setDeleteAllConfirmed(() => deleteConfirmed);
-    }
-    setIsOpen(true)
+  const dispatch = useAppDispatch();
+  const popupState = useAppSelector(state => state.popups);
+  const taskList = useAppSelector(state => state.taskList);
+  const completedCount: number = taskList.reduce((count, task) => {
+    return task.status ? count + 1 : count;
+  }, 0);
+
+  const openDeleteTaskPopup = (id: string) => {
+    dispatch(openPopup({
+      isOpen: true,
+      message: 'Delete this task?',
+      type: 'deleteSingle',
+      id: id
+    }))
+  }
+
+  const openDeleteAllPopup = () => {
+    if(!completedCount) return
+
+    dispatch(openPopup({
+      isOpen: true,
+      message: 'Delete all completed tasks?',
+      type: 'deleteAll',
+      id: ''
+    }))
   }
 
   const openEditPopup = (id: string) => {
-    setTaskId(id);
-    setEditIsOpen(true);
+    dispatch(openPopup({
+      isOpen: true,
+      type: 'edit',
+      message: '',
+      id: id
+    }))
   }
 
-  const closePopup = () => {
-    setIsOpen(false);
-    setEditIsOpen(false);
-  }
-
-  const onConfirm = () => {
-    if (taskId) {
-      deleteConfirmed(taskId)
-    } else {
-      deleteAllConfirmed()
+  const onConfirm = (editedTitle?: string, editedDescription?: string) => {
+    if (popupState.type === 'deleteSingle') {
+      dispatch(deleteTask(popupState.id));
+      dispatch(closePopup());
     }
-
-    closePopup()
+    if (!popupState.id) {
+      dispatch(deleteAllCompleted());
+      dispatch(closePopup());
+    }
+    if (popupState.type === 'edit' && editedTitle && editedDescription) {
+      dispatch(saveEditTask({
+        newTitle: editedTitle,
+        newDescription: editedDescription,
+        id: popupState.id
+      }));
+      dispatch(closePopup());
+    }
   }
 
   const onCancel = () => {
-    closePopup()
+    dispatch(closePopup())
   }
 
   return {
-    isOpen,
-    editIsOpen,
-    message,
-    openPopup,
-    openEditPopup,
+    openDeleteTaskPopup,
+    openDeleteAllPopup,
     onConfirm,
-    onCancel
+    onCancel,
+    openEditPopup
   }
 }
 

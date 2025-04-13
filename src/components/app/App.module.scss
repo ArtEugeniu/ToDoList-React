@@ -8,6 +8,9 @@
   height: 80vh;
   border-radius: 10px;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
   & h1 {
     text-align: center;

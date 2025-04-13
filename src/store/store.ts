@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import taskListReducer from './taskListSlice';
+import popupSlice from "./popupSlice";
 
 export const store = configureStore({
   reducer: {
-    taskList: taskListReducer
+    taskList: taskListReducer,
+    popups: popupSlice
   }
 });
 

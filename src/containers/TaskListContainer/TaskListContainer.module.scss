@@ -1,0 +1,8 @@
+@use '../../styles/variables' as *;
+
+.taskListContainer {
+  border-radius: 5px;
+  box-shadow: $box-shadow;
+  padding: 5px;
+  height: 100%;
+}

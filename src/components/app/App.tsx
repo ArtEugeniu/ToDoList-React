@@ -1,8 +1,10 @@
 import styles from './App.module.scss';
-import CreateTasks from '../../containers/createTasks/CreateTasks';
-import TaskManager from '../../containers/taskManager/TaskManager';
-import ResponsiveMessage from '../responsiveMessage/ResponsiveMessage';
 import { useState, useEffect } from 'react';
+import CreateTasks from '../../containers/createTasks/CreateTasks';
+import ResponsiveMessage from '../responsiveMessage/ResponsiveMessage';
+import TaskListFilter from '../../containers/taskListFilterContainer/TaskListFilterContainer';
+import ConfirmPopup from '../confirmPopup/ConfirmPopup';
+import EditPopupContainer from '../../containers/editPopupContainer/EditPopupContainer'
 
 const App: React.FC = () => {
 
@@ -28,7 +30,9 @@ const App: React.FC = () => {
         <article className={styles.todoApp}>
           <h1>To Do App</h1>
           <CreateTasks />
-          <TaskManager />
+          <TaskListFilter />
+          <ConfirmPopup />
+          <EditPopupContainer />
         </article>
       }
     </>

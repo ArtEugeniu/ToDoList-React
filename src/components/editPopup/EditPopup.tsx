@@ -1,16 +1,23 @@
 import styles from './EditPopup.module.scss';
+import { useConfirmPopup } from '../../hooks/useConfirmPopup';
 
-interface IEditPopupPropsType {
-  isOpen: boolean
-  newText: { title: string, description: string }
-  onCancel: () => void
-  onChange: (value: string, name: string) => void
-  onAccept: () => void
+interface EditPopupTypes {
+  inputsValue: { title: string, description: string }
+  editPopupState: {
+    isOpen: boolean
+    type: 'deleteSingle' | 'deleteAll' | 'edit' | null
+    message: string
+    id?: string
+  }
+  onInputChange: (value: string, name: string) => void
 }
 
-const EditPopup: React.FC<IEditPopupPropsType> = ({ isOpen, newText, onCancel, onChange, onAccept }) => {
+const EditPopup: React.FC<EditPopupTypes> = ({ inputsValue, editPopupState, onInputChange }) => {
 
-  if (!isOpen) return;
+  const { onCancel, onConfirm } = useConfirmPopup()
+
+  if(editPopupState.isOpen === false) return null;
+  if(editPopupState.type !== 'edit') return null;
 
 
   return (
@@ -18,14 +25,14 @@ const EditPopup: React.FC<IEditPopupPropsType> = ({ isOpen, newText, onCancel, o
       <div className={styles.editContainer}>
         <ul className={styles.editList}>
           <li className={styles.editItem}>
-            <input className={styles.editInput} type="text" name="title" value={newText.title} onChange={(e) => onChange(e.target.value, e.target.name)} />
+            <input className={styles.editInput} type="text" name="title" value={inputsValue.title} onChange={(e) => onInputChange(e.target.value, e.target.name)}/>
           </li>
           <li className={styles.editItem}>
-            <textarea className={`${styles.editInput} ${styles.editInputDesc}`} name="description" value={newText.description} onChange={(e) => onChange(e.target.value, e.target.name)} />
+            <textarea className={`${styles.editInput} ${styles.editInputDesc}`} name="description" value={inputsValue.description} onChange={(e) => onInputChange(e.target.value, e.target.name)}/>
           </li>
         </ul>
         <div className={styles.editButtons}>
-          <button className={styles.editButton} onClick={onAccept}>Save</button>
+          <button className={styles.editButton} onClick={() => onConfirm(inputsValue.title, inputsValue.description)}>Save</button>
           <button className={styles.editButton} onClick={onCancel}>Cancel</button>
         </div>
       </div>
