@@ -16,8 +16,7 @@ const EditPopup: React.FC<EditPopupTypes> = ({ inputsValue, editPopupState, onIn
 
   const { onCancel, onConfirm } = useConfirmPopup()
 
-  if(editPopupState.isOpen === false) return null;
-  if(editPopupState.type !== 'edit') return null;
+  if (!editPopupState.isOpen || editPopupState.type !== 'edit') return null;
 
 
   return (

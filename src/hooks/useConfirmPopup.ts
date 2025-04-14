@@ -41,7 +41,7 @@ export const useConfirmPopup = () => {
     }))
   }
 
-  const onConfirm = (editedTitle?: string, editedDescription?: string) => {
+  const onConfirm = (editedTitle: string, editedDescription: string) => {
     if (popupState.type === 'deleteSingle') {
       dispatch(deleteTask(popupState.id));
       dispatch(closePopup());
@@ -50,7 +50,7 @@ export const useConfirmPopup = () => {
       dispatch(deleteAllCompleted());
       dispatch(closePopup());
     }
-    if (popupState.type === 'edit' && editedTitle && editedDescription) {
+    if (popupState.type === 'edit') {
       dispatch(saveEditTask({
         newTitle: editedTitle,
         newDescription: editedDescription,

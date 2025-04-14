@@ -3,7 +3,6 @@
 .task {
 
   &List {
-    max-height: 469px;
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
@@ -33,7 +32,7 @@
 
 
     &:not(:last-child) {
-      margin-bottom: 16px;
+      margin-bottom: 8px;
     }
 
     & input {
